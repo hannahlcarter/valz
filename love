@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zach 💖 Will You Be My Valentine?</title>
+
+  <!-- iPhone-friendly scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 22px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      max-width: 90%;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: 220px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 26px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 12px;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+      animation: vibrate 1.5s infinite;
+    }
+
+    #noBtn {
+      background-color: #ccc;
+      position: absolute;
+    }
+
+    .message {
+      font-size: 22px;
+      color: #ff4d6d;
+      margin-top: 20px;
+      display: none;
+    }
+
+    /* Vibration animation */
+    @keyframes vibrate {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Zach 💘 Will you be my Valentine?</h1>
+
+    <!-- Dachshund -->
+    <img
+      src="https://images.unsplash.com/photo-1619983081563-430f63602796"
+      alt="Cute Dachshund"
+    />
+
+    <br />
+
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙃</button>
+
+    <div class="message" id="message">
+      YAY! Best Valentine ever!
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+
+    function moveNoButton() {
+      const rect = noBtn.getBoundingClientRect();
+      const x = Math.random() * (window.innerWidth - rect.width);
+      const y = Math.random() * (window.innerHeight - rect.height);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    // Desktop: avoid mouse
+    document.addEventListener("mousemove", (e) => {
+      const rect = noBtn.getBoundingClientRect();
+      const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+      );
+
+      if (distance < 120) {
+        moveNoButton();
+      }
+    });
+
+    // Mobile: avoid touch
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+
+    // YES button action
+    yesBtn.addEventListener("click", () => {
+      message.style.display = "block";
+      yesBtn.disabled = true;
+      yesBtn.style.animation = "none";
+      noBtn.style.display = "none";
+    });
+  </script>
+</body>
+</html>

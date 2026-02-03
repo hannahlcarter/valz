@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Zach 💖 Will You Be My Valentine?</title>
-
-  <!-- iPhone-friendly scaling -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -66,7 +64,6 @@
       display: none;
     }
 
-    /* Vibration animation */
     @keyframes vibrate {
       0% { transform: translate(0); }
       20% { transform: translate(-2px, 2px); }
@@ -81,8 +78,8 @@
   <div class="container">
     <h1>Zach 💘 Will you be my Valentine?</h1>
 
- <!-- Dachshund -->
-<img src="dachshund.jpg" alt="Cute dachshund" />
+    <!-- Dachshund image -->
+    <img id="dachshundImg" src="dachshund.jpg" alt="Cute dachshund" />
 
     <br />
 
@@ -95,49 +92,18 @@
   </div>
 
   <script>
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const message = document.getElementById("message");
-  const dachshundImg = document.getElementById("dachshundImg");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+    const dachshundImg = document.getElementById("dachshundImg");
 
-  function moveNoButton() {
-    const rect = noBtn.getBoundingClientRect();
-    const x = Math.random() * (window.innerWidth - rect.width);
-    const y = Math.random() * (window.innerHeight - rect.height);
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
-  }
-
-  document.addEventListener("mousemove", (e) => {
-    const rect = noBtn.getBoundingClientRect();
-    const distance = Math.hypot(
-      e.clientX - (rect.left + rect.width / 2),
-      e.clientY - (rect.top + rect.height / 2)
-    );
-
-    if (distance < 120) {
-      moveNoButton();
-    }
-  });
-
-  noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    moveNoButton();
-  });
-
-  // 💖 YES button action
-  yesBtn.addEventListener("click", () => {
-    message.style.display = "block";
-    yesBtn.disabled = true;
-    yesBtn.style.animation = "none";
-    noBtn.style.display = "none";
-
-    // 🐶 Change dachshund to smiling version
-    dachshundImg.src = "dachshund_smile.jpg";
-    dachshundImg.alt = "Smiling dachshund";
-  });
-</script>
-  
+    // Move the NO button randomly
+    function moveNoButton() {
+      const rect = noBtn.getBoundingClientRect();
+      const x = Math.random() * (window.innerWidth - rect.width);
+      const y = Math.random() * (window.innerHeight - rect.height);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
     }
 
     // Desktop: avoid mouse
@@ -148,9 +114,7 @@
         e.clientY - (rect.top + rect.height / 2)
       );
 
-      if (distance < 120) {
-        moveNoButton();
-      }
+      if (distance < 120) moveNoButton();
     });
 
     // Mobile: avoid touch
@@ -159,12 +123,16 @@
       moveNoButton();
     });
 
-    // YES button action
+    // YES button click
     yesBtn.addEventListener("click", () => {
       message.style.display = "block";
       yesBtn.disabled = true;
       yesBtn.style.animation = "none";
       noBtn.style.display = "none";
+
+      // Change dachshund to smiling version
+      dachshundImg.src = "dachshund_smile.jpg?" + new Date().getTime();
+      dachshundImg.alt = "Smiling dachshund";
     });
   </script>
 </body>
